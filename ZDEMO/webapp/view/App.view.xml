@@ -1,0 +1,41 @@
+<mvc:View controllerName="ZDEMO.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" displayBlock="true" busy="{appModel>/isBusy}">
+	<App id="idAppControl">
+		<pages>
+			<Page title="{data>/task/title}" showHeader="false" showFooter="false">
+				<content>
+					<ObjectHeader title="{data>/task/title}" backgroundDesign="Solid">
+						<attributes>
+							<ObjectAttribute title="{i18n>GENERIC_CREATEDON}" text="{path: 'data>/task/createdOn', formatter: '.formatDate'}"/>
+						</attributes>
+						<statuses>
+							<ObjectStatus title="{i18n>GENERIC_STATUS}" text="{data>/task/statusText}"/>
+							<ObjectStatus title="{i18n>GENERIC_PRIORITY}" text="{data>/task/priorityText}"/>
+						</statuses>
+					</ObjectHeader>
+					<!-- Everything starting from here is just an example -->
+					<IconTabBar expanded="{device>/isNoPhone}" class="sapUiSmallMarginBottom sapUiResponsiveContentPadding">
+						<items>
+							<IconTabFilter text="Info">
+								<f:SimpleForm minWidth="1024" maxContainerCols="2" layout="ResponsiveGridLayout">
+									<f:title>
+										<core:Title text="A Form"/>
+									</f:title>
+									<Label text="Label"/>
+									<Text text="Value"/>
+								</f:SimpleForm>
+							</IconTabFilter>
+							<IconTabFilter text="Attachments">
+								<List headerText="A List" showSeparators="Inner"></List>
+							</IconTabFilter>
+							<IconTabFilter text="Notes">
+								<FeedInput/>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+					<!-- End of example coding -->
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>超額審批結果通知</title>
+        <style>
+            h3 {
+                font-family: serif;
+            }
+            p, dl, dd, dt {
+                font-family: sans-serif;
+            }
+            dt {
+                text-indent: 5em;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Dear All,</p>
+        <p>交貨單${context.DELIVERDOCUMENT}已於${context.CREATEDATE}完成審批流程.
+        <p>審批結果:${context.SUGGESTION}.
+        <p>請查收，謝謝~.
+        <p>注：此通知為系統自動發送郵件，請勿直接回復。</p>
+    </body>
+</html>
+<!--<html>
+    <head>
+        <title>交貨單審批結果通知</title>
+        <style>
+            h3 {
+                font-family: serif;
+            }
+            p, dl, dd, dt {
+                font-family: sans-serif;
+            }
+            dt {
+                text-indent: 5em;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>交貨單 ${context.DELIVERDOCUMENT} 審批完成</h3>
+        <p>Dear,</p>
+        <p>交貨單 ${context.DELIVERDOCUMENT} 已結束~.
+        <p>注：此通知為系統自動發送郵件，請勿直接回復。</p>
+    </body>
+</html>-->

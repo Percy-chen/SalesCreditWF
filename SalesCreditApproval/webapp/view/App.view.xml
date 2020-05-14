@@ -1,0 +1,158 @@
+<mvc:View controllerName="SalesCreditApproval.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" displayBlock="true" busy="{appModel>/isBusy}">
+	<App id="idAppControl" height="85%">
+		<pages>
+			<Page showHeader="false" showFooter="false">
+				<content>
+					<f:Form editable="true">
+						<f:toolbar>
+							<Toolbar id="TB1">
+								<Title id="Title1" text="超信用額度申請表" level="H4" titleStyle="H4"/>
+								<ToolbarSpacer/>
+								<Button icon="sap-icon://print" text="打印" press="handlePrint" type="Accept"/>
+							</Toolbar>
+						</f:toolbar>
+						<f:layout>
+							<f:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="2"/>
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="申請人:" width="6em" textAlign="Begin"/>
+												<Input id="APPLICANT" value="{data>/context/APPLICANT}" editable="false"/>
+												<!--<Text text="{data>/context/APPLICANTNAME}"/>-->
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="業務員:" width="6em" textAlign="Begin"/>
+												<Input id="SALESMAN" value="{data>/context/SALESMAN}" editable="false"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="创建日期:" width="6em" textAlign="Begin"/>
+												<DatePicker id="CREATEDATE" value="{path:'data>/context/CREATEDATE', formatter: '.formatDate'}" width="10em" editable="false"
+													valueFormat="yyyyMMdd" placeholder=" " displayFormat="yyyy-MM-dd"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="單號:" width="6em" textAlign="Begin"/>
+												<Input id="DELIVERDOCUMENT" value="{data>/context/DELIVERDOCUMENT}" editable="false"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="公司代碼:" width="8rem" textAlign="Begin"/>
+												<Input id="COMPANYCODE" value="{data>/context/COMPANYCODE}" editable="false" width="6em"/>
+												<Text text="{data>/context/COMPANYNAME}"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="交易幣別:" width="6em" textAlign="Begin"/>
+												<Input id="TRANSCURRENCY" value="{data>/context/TRANSCURRENCY}" editable="false"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="信用額度(TWD):" width="8rem" textAlign="Begin"/>
+												<Input id="CREDITLIMITCURR" value="{data>/context/CREDITLIMITCURR}" editable="false"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="銷貨金額:" width="6em" textAlign="Begin"/>
+												<Input id="NETAMOUNT" value="{data>/context/NETAMOUNT}" editable="false"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="應收帳款(TWD):" width="8rem" textAlign="Begin"/>
+												<Input id="COMPCURR" value="{data>/context/COMPCURR}" editable="false"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="客戶:" width="6em" textAlign="Begin"/>
+												<Input id="SOLDTOPARTY" value="{data>/context/SOLDTOPARTY}" editable="false"/>
+												<Text text="{data>/context/SEARCHTERMS1}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="信用餘額(TWD):" width="8rem" textAlign="Begin"/>
+												<Input id="CREDITBALANCE" value="{data>/context/CREDITBALANCE}" editable="false"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="付款条件:" width="6em" textAlign="Begin"/>
+												<Input id="PAYMENTTERMS" value="{data>/context/PAYMENTTERMS}" editable="false"/>
+												<Text text="{data>/context/PAYMENTTERMSNAME}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="逾期應收款(TWD):" width="8rem" textAlign="Begin"/>
+												<Input id="OVERDUECURR" value="{data>/context/OVERDUECURR}" editable="false"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+					<l:VerticalLayout class="sapUiContentPadding" width="100%" enabled="false">
+						<Text text="原因說明" class="sapUiTinyMarginTop"/>
+						<TextArea id="REASON" value="{data>/context/REASON}" showExceededText="true" maxLength="200" width="100%"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout class="sapUiContentPadding" width="100%" enabled="true">
+						<Text text="簽核意見" class="sapUiTinyMarginTop"/>
+						<TextArea id="RESULT" value="{data>/context/RESULT}" showExceededText="true" maxLength="200" width="100%"/>
+					</l:VerticalLayout>
+					<Table id="Record" inset="false" items="{ path: 'data>/context/LOG'}" class="sapFDynamicPageAlignContent" width="auto" mode="None"
+						busyIndicatorDelay="10" growing="true" growingScrollToLoad="true">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="審批紀錄表" level="H2"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column hAlign="Begin" width="6em">
+								<Text text="簽核节点"/>
+							</Column>
+							<Column hAlign="Begin" width="8em">
+								<Text text="簽核人員"/>
+							</Column>
+							<Column hAlign="Begin" width="10em">
+								<Text text="職稱"/>
+							</Column>
+							<Column hAlign="Begin" width="8em">
+								<Text text="簽核時間"/>
+							</Column>
+							<Column hAlign="Begin" width="6em">
+								<Text text="簽核意見"/>
+							</Column>
+							<Column hAlign="Begin">
+								<Text text="簽核結果"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{data>NODEID}"/>
+									<Text text="{data>ACCOUNT}"/>
+									<Text text="{data>JOB}"/>
+									<Text text="{path:'data>APPROVALDATE', formatter: '.formatDate'}"/>
+									<Text text="{data>SUGGESTION}"/>
+									<Text text="{data>RESULT}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
